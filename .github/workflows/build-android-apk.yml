@@ -36,8 +36,8 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: 4. Setup Android SDK Tools
-        uses: android-actions/setup-android@v3
+      - name: 4. Accept Android SDK Licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: 5. Install Node Dependencies
         run: npm ci || npm install

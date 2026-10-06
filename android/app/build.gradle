@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.aurafit.app'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId 'com.aurafit.app'
@@ -54,7 +54,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.5'
 
     // Google Health Connect Client (Official Android Proof of Work)
-    implementation 'androidx.health.connect:connect-client:1.0.0-rc01'
+    implementation 'androidx.health.connect:connect-client:1.1.0-alpha10'
 
     // AndroidX WorkManager (Daily 23:59 Loss Aversion Deadline Worker)
     implementation 'androidx.work:work-runtime-ktx:2.9.1'

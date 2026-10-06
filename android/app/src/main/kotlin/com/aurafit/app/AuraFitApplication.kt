@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import android.util.Log
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -18,8 +19,17 @@ class AuraFitApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        createNotificationChannels()
-        scheduleDailyDeadlineWorker()
+        try {
+            createNotificationChannels()
+        } catch (e: Exception) {
+            Log.e("AuraFit", "Errore creazione canali notifica", e)
+        }
+
+        try {
+            scheduleDailyDeadlineWorker()
+        } catch (e: Exception) {
+            Log.e("AuraFit", "Errore inizializzazione WorkManager", e)
+        }
     }
 
     private fun createNotificationChannels() {

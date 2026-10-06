@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private val healthConnectClient by lazy {
-        if (HealthConnectClient.isProviderAvailable(this)) {
+        if (HealthConnectClient.getSdkStatus(this) == HealthConnectClient.SDK_AVAILABLE) {
             HealthConnectClient.getOrCreate(this)
         } else {
             null

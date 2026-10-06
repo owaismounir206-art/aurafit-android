@@ -1,0 +1,64 @@
+name: Build Android APK (AuraFit M3)
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Package Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Java JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: 3. Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 4. Setup Android SDK Tools
+        uses: android-actions/setup-android@v3
+
+      - name: 5. Install Node Dependencies
+        run: npm ci || npm install
+
+      - name: 6. Run Typecheck & Unit Tests
+        run: npm test
+
+      - name: 7. Build Web Application Assets
+        run: npm run build
+
+      - name: 8. Grant Execute Permissions to Gradle Wrapper
+        run: chmod +x android/gradlew
+
+      - name: 9. Compile Android Debug APK
+        working-directory: ./android
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: 10. Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aurafit-m3-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          retention-days: 14
+          if-no-files-found: error

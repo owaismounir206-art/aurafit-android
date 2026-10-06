@@ -1,0 +1,35 @@
+name: Lint & Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Unit Tests & TypeScript Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Typecheck TypeScript
+        run: npx tsc --noEmit
+
+      - name: Execute Vitest Suite
+        run: npm test -- --coverage=false

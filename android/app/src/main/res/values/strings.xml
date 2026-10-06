@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AuraFit</string>
+    <string name="health_connect_rationale">AuraFit richiede l\'accesso a Google Health Connect per verificare oggettivamente l\'esecuzione degli allenamenti attraverso frequenza cardiaca e minuti attivi, proteggendo la tua streak dal protocollo di Loss Aversion.</string>
+    <string name="channel_penalty_name">Allerta Penitenze e Scadenza Workout</string>
+    <string name="channel_penalty_description">Notifiche serali (ore 23:59) per la verifica della sessione giornaliera e applicazione penitenze di Loss Aversion.</string>
+</resources>

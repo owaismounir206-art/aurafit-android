@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --md-sys-color-primary: #006A60;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #73F8E7;
+  --md-sys-color-on-primary-container: #00201C;
+  --md-sys-color-secondary: #4A635F;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #CCE8E2;
+  --md-sys-color-on-secondary-container: #05201C;
+  --md-sys-color-tertiary: #456179;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #CCE5FF;
+  --md-sys-color-on-tertiary-container: #001D32;
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-background: #F4FAF8;
+  --md-sys-color-on-background: #161D1B;
+  --md-sys-color-surface: #F4FAF8;
+  --md-sys-color-on-surface: #161D1B;
+  --md-sys-color-surface-variant: #DAE5E1;
+  --md-sys-color-on-surface-variant: #3F4946;
+  --md-sys-color-outline: #6F7976;
+  --md-sys-color-outline-variant: #BEC9C5;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #EEF5F3;
+  --md-sys-color-surface-container: #E8F0EE;
+  --md-sys-color-surface-container-high: #E2EAE8;
+  --md-sys-color-surface-container-highest: #DCE4E2;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* Material You Ripple / Active State */
+.m3-ripple {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.18s cubic-bezier(0.2, 0, 0, 1), transform 0.12s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.m3-ripple:active {
+  transform: scale(0.98);
+}
+
+/* Hide scrollbars for clean mobile feel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Heartbeat pulse animation for biometrics */
+@keyframes ecg-pulse {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.18); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.12); }
+  70% { transform: scale(1); }
+}
+
+.animate-heartbeat {
+  animation: ecg-pulse 1.1s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Streak flame flicker */
+@keyframes flame-glow {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 6px #ff8a00); }
+  50% { opacity: 1; filter: drop-shadow(0 0 14px #ff5100); }
+}
+
+.animate-flame {
+  animation: flame-glow 2s ease-in-out infinite;
+}

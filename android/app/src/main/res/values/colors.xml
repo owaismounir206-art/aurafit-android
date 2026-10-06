@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material Design 3 Palette (Forest Teal Primary & Deep Coral Alert) -->
+    <color name="md_theme_light_primary">#006A60</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#73F8E7</color>
+    <color name="md_theme_light_onPrimaryContainer">#00201C</color>
+    
+    <color name="md_theme_light_secondary">#4A635F</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#CCE8E2</color>
+    <color name="md_theme_light_onSecondaryContainer">#05201C</color>
+    
+    <!-- Tertiary for Cryogenic Freeze Days / Jolly -->
+    <color name="md_theme_light_tertiary">#456179</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#CCE5FF</color>
+    <color name="md_theme_light_onTertiaryContainer">#001D32</color>
+    
+    <!-- Error for Penalties & Debt Accumulation -->
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    
+    <!-- Surface & Background with Tonal Elevation -->
+    <color name="md_theme_light_background">#FAFDFB</color>
+    <color name="md_theme_light_onBackground">#191C1B</color>
+    <color name="md_theme_light_surface">#FAFDFB</color>
+    <color name="md_theme_light_onSurface">#191C1B</color>
+    <color name="md_theme_light_surfaceVariant">#DAE5E1</color>
+    <color name="md_theme_light_onSurfaceVariant">#3F4946</color>
+    <color name="md_theme_light_outline">#6F7976</color>
+    <color name="md_theme_light_outlineVariant">#BEC9C5</color>
+</resources>

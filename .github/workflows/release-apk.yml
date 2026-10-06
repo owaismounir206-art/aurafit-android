@@ -1,0 +1,84 @@
+name: Release Android APK (GitHub Releases)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Nome del tag di release (es. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-release:
+    name: Build & Publish Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Java JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: 3. Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 4. Setup Android SDK Tools
+        uses: android-actions/setup-android@v3
+
+      - name: 5. Install Node Dependencies
+        run: npm ci || npm install
+
+      - name: 6. Run Unit Tests & Verification
+        run: npm test
+
+      - name: 7. Build Web Application Assets
+        run: npm run build
+
+      - name: 8. Grant Execute Permissions to Gradle Wrapper
+        run: chmod +x android/gradlew
+
+      - name: 9. Compile Android Debug APK
+        working-directory: ./android
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: 10. Publish GitHub Release with APK Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag_name || github.ref_name }}
+          name: AuraFit MVP ${{ github.event.inputs.tag_name || github.ref_name }} (Android Material You)
+          body: |
+            ## ⚡ AuraFit MVP Release
+            
+            Prima release ufficiale per **AuraFit**: Conditioning Atletico Multi-Sport con Cluster Biomeccanici, Loss Aversion e Material Design 3.
+            
+            ### 📱 Asset Inclusi
+            - APK Android Debug compilato automaticamente e pronto per il sideload o installazione via ADB.
+            - Integrazione biometrica Google Health Connect (minSdk 26, targetSdk 34).
+            
+            ### 🛠️ Caratteristiche Chiave
+            - **4 Cluster Biomeccanici:** Situazionali & Squadra, Forza & Skill, Endurance & Ciclici, Combat & Reattività.
+            - **Proof of Work Biometrica:** Convalida frequenza cardiaca e minuti attivi.
+            - **Commitment Contract:** Penitenze fisiche (Burpees), sociali (Squad Wall) e finanziarie.
+            - **Material You Dynamic Theming:** Palette Monet ed elevazione tonale.
+          draft: false
+          prerelease: false
+          files: |
+            android/app/build/outputs/apk/debug/*.apk
